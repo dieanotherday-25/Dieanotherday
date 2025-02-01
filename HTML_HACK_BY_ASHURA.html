@@ -1,0 +1,42 @@
+setTimeout(updateTime, 1000);
+        }
+        updateTime();
+
+        // Button and ListView behavior
+        let historyData = [];
+
+        checkResultBtn.addEventListener('click', function() {
+            if (textview3.innerText !== 'Please wait for next period') {
+                let randomResult = Math.floor(Math.random() * 100) + 1;
+                textview3.innerText = Random Result: ${randomResult};
+                historyData.push(randomResult);
+                updateListView();
+            } else {
+                textview3.innerText = 'Please wait for next period';
+            }
+        });
+
+        function updateListView() {
+            let listView = document.getElementById("listview");
+            listView.innerHTML = '';
+            historyData.forEach(result => {
+                let item = document.createElement('div');
+                item.innerText = Result: ${result};
+                listView.appendChild(item);
+            });
+        }
+
+        // Disable button initially if not time for check
+        function toggleButtonState() {
+            if (textview2.innerText === '00') {
+                checkResultBtn.disabled = false;
+            } else {
+                checkResultBtn.disabled = true;
+            }
+        }
+
+        setInterval(toggleButtonState, 1000);
+
+    </script>
+</body>
+</html>
